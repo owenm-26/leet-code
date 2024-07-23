@@ -1,13 +1,23 @@
 class Solution(object):
-    def increasingTriplet(nums: []):
-        length =len(nums)
-        if(length < 3):
-            return False
-        
-        for i in range(length -2):
-            if(nums[i] < nums[i+1] and nums[i+1] < nums[i+2]):
+    def increasingTriplet(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        # explanation: iterate through list once and update first + second when 
+        # you find a number <= to either of them. If you find a number that is 
+        # <= both of them then that means you have found the increasing triplet since
+        # you're iterating from left to right
+        first = second = float('inf')
+
+        for item in nums:
+            if item <= first:
+                first = item
+            elif item <= second:
+                second = item
+            else:
                 return True
-        return False 
-    
-    answer = increasingTriplet([2,1,5,0,4,6])
-    print(answer)
+
+        return False
+
+        
