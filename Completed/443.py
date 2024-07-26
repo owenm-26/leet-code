@@ -1,28 +1,37 @@
 class Solution(object):
-    def stringCompression(chars):
-        s = []
-        i=0
-        while i < len(chars)-1:
-            streak = 1
-            print('i',i)
+    def compress(self, chars):
+        """
+        :type chars: List[str]
+        :rtype: int
+        """
 
-            while streak + i < len(chars) and chars[i+ streak -1] == (chars[i+streak]):
-                streak +=1
-            
-            if(streak == 1):
-                s.append(chars[i])
-            elif(streak > 10):
-                s.append(chars[i])
-                for i in range(len(str(streak))):
-                    s.append(str(streak)[i])
+        # explanation: iterate through keep track of streak and letter
+        # and append once you hit a new letter before writing back to char
+
+        if(len(chars) == 0):
+            return 0
+        
+        streak = 1
+        char = chars[0]
+        answer = [char]
+
+        for c in chars[1:]:
+            if(c == char):
+                streak = streak + 1
             else:
-                s.append(chars[i])
-                s.append(str(streak))
-            i += streak 
-            
-               
-            
-        chars = s
-        return chars
-    answer = stringCompression( ["a","b","b","b","b","b","b","b","b","b","b","b","b"])
-    print(answer)
+                if(streak != 1):
+                    for d in str(streak): 
+                        answer.append(d)
+                       
+                streak = 1
+                answer.append(c)
+                char = c
+        if(streak != 1):
+            for d in str(streak):
+                      
+                        answer.append(d)
+        for i in range(len(answer)):
+            chars[i] = answer[i]
+        chars = chars[:len(answer)]
+        return len(chars)
+        
