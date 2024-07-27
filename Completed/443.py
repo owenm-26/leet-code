@@ -35,3 +35,42 @@ class Solution(object):
         chars = chars[:len(answer)]
         return len(chars)
         
+
+# other solution
+class Solution(object):
+    def compress(self, chars):
+        """
+        :type chars: List[str]
+        :rtype: int
+        """
+
+        if(len(chars) == 0):
+            return 0
+        
+        streak = 1
+        char = chars[0]
+        
+        writer = 1
+
+        for c in chars[1:]:
+            if(c == char):
+                streak = streak + 1
+            else:
+                if(streak != 1):
+                    for d in str(streak): 
+                        chars[writer] = d
+                        writer = writer + 1
+                       
+                streak = 1
+                chars[writer] = c
+                writer = writer + 1
+                char = c
+        if(streak != 1):
+            for d in str(streak): 
+                chars[writer] = d
+                writer = writer + 1
+        # for i in range(len(answer)):
+        #     chars[i] = answer[i]
+        # chars = chars[:len(answer)]
+        return writer
+        
