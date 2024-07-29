@@ -4,6 +4,36 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        
+        # OPTIMAL
+        curr = 0
+        prev = 0
+        best = 0
+
+        for ele in nums:
+            if(ele == 1):
+                curr += 1
+            else:
+                best = max(best, curr + prev)
+                prev = curr
+                curr = 0
+        best = max(best, curr + prev)
+
+        if(len(nums) == best):
+            return best-1
+        else:
+            return best
+
+
+
+class Solution(object):
+    def longestSubarray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        
+
         # INEFFICIENT: explanation: same as Max Consecutive Ones III but k = 1 and you need
         # to account for the case where they are all ones as well as subtract one from the
         # end total because instead of flipping you delete
