@@ -25,3 +25,28 @@ class Solution(object):
             return len(nums) - 1
         else:
             return best
+        
+    # simple but "inefficient"
+    def longestSubarray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        
+        left = 0
+        right = 0
+        count = 0
+        n = len(nums)
+        best = 0
+
+        while right < n:
+            if nums[right] == 0:
+                count += 1
+            while count > 1:
+                if nums[left] == 0:
+                    count -= 1
+                left += 1
+            right += 1
+            best = max(best, right-left-1)
+
+        return best
