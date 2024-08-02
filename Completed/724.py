@@ -4,7 +4,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        # explanation: prefix sum and ignore number currently on
+        # explanation:  
 
         # sum all elements of array
         total = 0
