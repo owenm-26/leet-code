@@ -11,7 +11,7 @@ class Solution(object):
         if n <= 2:
             return 0 if n==0 else 1
 
-        for i in range(2, n):
+        for i in range(3, n+1):
             a,b,c = b, c, c + a + b
         return c
 
