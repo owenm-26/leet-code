@@ -1,20 +1,21 @@
+from collections import deque
 class RecentCounter(object):
-    def __init__(self) -> None:
-        self.counter = 0
-        self.requestTimes = []
-    
+
+    def __init__(self):
+       self.pingTimes = deque()
+        
+
     def ping(self, t):
-        self.counter += 1
-        self.requestTimes.append(t)
-        sameTime = 1
-        for i in range(len(self.requestTimes)):
-            if(t - 3000 <= self.requestTimes[i]):
-                # print('t', t )
-                # print('self.requestTimes[i]', self.requestTimes[i] )
-                sameTime = len(self.requestTimes)-i
-                break
-        print(sameTime)
-        return sameTime
+        """
+        :type t: int
+        :rtype: int
+        """
+        self.pingTimes.append(t)
+
+        while self.pingTimes and self.pingTimes[0] < t-3000:
+            self.pingTimes.popleft()
+        return len(self.pingTimes)
+
 
 
 recentCounter = RecentCounter()
