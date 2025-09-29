@@ -1,21 +1,14 @@
-def rob(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
+class Solution:
+    def rob(self, nums):
+        if len(nums) == 1:
+            return nums[0]
 
-        n = len(nums)
+        M = [float("-inf")] * len(nums)
+        M[0] = nums[0]
+        M[1] = max(nums[0], nums[1])
 
-        if n < 3:
-            return max(nums)
+        for i in range(2, len(nums)):
+            M[i] = max(nums[i] + M[i-2], M[i-1])
 
+        return M[-1]
         
-        prev2 = nums[0]
-        prev1 = max(nums[0], nums[1])
-        temp = 0
-
-        for i in range(2, n):
-            temp = prev1
-            prev1 = max(prev1, prev2 + nums[i])
-            prev2 = temp
-        return prev1
