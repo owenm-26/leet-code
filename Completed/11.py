@@ -1,25 +1,17 @@
-class Solution(object):
-    def maxArea(self, height):
-        """
-        :type height: List[int]
-        :rtype: int
-        """
-        # explanation: Pointers from each end and move the 
-        # one that points to the smaller value towards middle until they cross
+class Solution:
+    def maxArea(self, heights):
+        curr_max = 0
 
-        currentBest = 0
-        x=0
-        y=0
-        p1, p2 = 0, len(height)-1
+        l,r = 0, len(heights)-1
 
-    
-        while p1 != p2:
-            x = p2 - p1
-            y = min(height[p1], height[p2])
-            currentBest = max(x * y, currentBest)
-            if(y == height[p1]):
-                p1 +=1
+        while l < r:
+            area = (r-l) * min(heights[l], heights[r])
+            curr_max = max(curr_max, area)
+
+            if(heights[l] < heights[r]):
+                l+=1
             else:
-                p2 -= 1
+                r-=1
 
-        return currentBest
+        return curr_max
+        
