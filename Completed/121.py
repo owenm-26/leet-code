@@ -6,8 +6,6 @@ class Solution(object):
         """
         # explanation: we only care about the lowest sell price and profit.
         # iterate through linearly and update them both
-        if(len(prices) == 0):
-            return 0
         
         lowestBuy = prices[0]
         profit = 0
